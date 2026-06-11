@@ -169,7 +169,6 @@
 <script>
   // ===== change these two when ready =====
   var ARTIST_EMAIL = "susang7@hotmail.com";          // Susan's email (for inquiries)
-  var STORE_URL    = "https://pixels.com";          // her print-store link (Fine Art America / Pixels)
 
   // ===== her paintings — edit titles & prices here anytime =====
   var PAINTINGS = [
@@ -238,7 +237,7 @@
       '<div class="meta">'+(p.medium||'')+(p.price && p.price!=='Inquire' ? ' · '+p.price : '')+'</div>'+
       '<div class="acts">'+
         (p.sold ? '<a class="sold">Sold</a>' : '<a class="inquire" onclick="inquireFor(\''+p.title.replace(/'/g,"")+'\')">Inquire</a>')+
-        '<a class="buyprint" href="'+(p.print||STORE_URL)+'" target="_blank" rel="noopener">Buy Prints</a>'+
+        '<a class="buyprint" onclick="orderPrint(\''+p.title.replace(/'/g,"")+'\')">Order a Print</a>'+
       '</div></div>';
     grid.appendChild(card);
   });
@@ -257,6 +256,13 @@
 
   function inquireFor(title){ document.getElementById('f-piece').value=title;
     document.getElementById('inquire').scrollIntoView({behavior:'smooth'}); }
+
+  function orderPrint(title){
+    var subject='Print order — '+title;
+    var body='Hi Susan,\n\nI would like to order a print of "'+title+'".\n\n'
+      +'Size wanted: \nQuantity: \nMy name: \nShipping address: \n\nThank you!';
+    window.location.href='mailto:'+ARTIST_EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  }
 
   function sendInquiry(){
     var name=document.getElementById('f-name').value||'(no name)';
