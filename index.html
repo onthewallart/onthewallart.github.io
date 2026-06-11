@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On The Wall Art — Susan Graham, Original Watercolours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wall:#17120d; --wall2:#1f1812; --panel:#241c14;
+    --frame:#c8a45c; --frame-d:#8a6f3c; --cream:#f2ebdd; --muted:#bbac92; --line:#3a2f23;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--wall);color:var(--cream);font-family:'EB Garamond',Georgia,serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:.5px}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(23,18,13,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:2px;text-transform:uppercase}
+  .brand b{color:var(--frame);font-weight:600}
+  nav.links a{margin-left:24px;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);transition:color .2s}
+  nav.links a:hover{color:var(--frame)}
+
+  .hero{text-align:center;padding:80px 0 56px;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 50% -10%, #2a2017 0%, var(--wall) 60%)}
+  .hero .eyebrow{letter-spacing:5px;text-transform:uppercase;font-size:13px;color:var(--frame)}
+  .hero h1{font-size:clamp(44px,8vw,82px);line-height:1.02;margin:14px 0 8px}
+  .hero .sub{font-style:italic;font-size:clamp(18px,3vw,24px);color:var(--muted)}
+  .rule{width:64px;height:1px;background:var(--frame);margin:24px auto 0}
+
+  section{padding:64px 0}
+  .sec-head{text-align:center;margin-bottom:34px}
+  .sec-head .eyebrow{letter-spacing:4px;text-transform:uppercase;font-size:12px;color:var(--frame)}
+  .sec-head h2{font-size:clamp(30px,5vw,44px);margin-top:6px}
+  .prints-banner{text-align:center;max-width:720px;margin:0 auto 40px;color:var(--muted);font-size:17px;font-style:italic;border:1px solid var(--line);border-radius:3px;padding:15px 24px;background:var(--wall2)}
+  .prints-banner b{color:var(--frame);font-style:normal}
+
+  /* gallery */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:44px 32px}
+  .piece{display:flex;flex-direction:column}
+  .art{position:relative;background:#efe7d6;padding:10px;border:1px solid #2c2c2c;box-shadow:0 16px 34px rgba(0,0,0,.5);cursor:zoom-in;line-height:0}
+  .art img{width:100%;height:auto;display:block}
+  .plaque{margin-top:14px;text-align:center}
+  .plaque .title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px}
+  .plaque .meta{font-size:13.5px;color:var(--muted);margin-top:1px}
+  .acts{margin-top:9px;display:flex;gap:8px;justify-content:center}
+  .acts a{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:7px 14px;border-radius:2px;cursor:pointer;transition:.2s}
+  .inquire{color:var(--cream);border:1px solid var(--frame-d)}
+  .inquire:hover{background:#2a2118;border-color:var(--frame)}
+  .buyprint{color:#1a140d;background:var(--frame);border:1px solid var(--frame)}
+  .buyprint:hover{background:#d8b978}
+  .sold{color:#9b8a6c;border:1px solid var(--line);pointer-events:none}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;background:rgba(8,5,2,.94);display:none;align-items:center;justify-content:center;z-index:100}
+  .lb.open{display:flex}
+  .lb img{max-width:92vw;max-height:86vh;box-shadow:0 20px 60px rgba(0,0,0,.6);background:#efe7d6;padding:10px}
+  .lb .cap{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:var(--cream);font-style:italic;font-size:18px}
+  .lb .x{position:absolute;top:20px;right:26px;font-size:34px;color:var(--cream);cursor:pointer;line-height:1}
+  .lb .nav-btn{position:absolute;top:50%;transform:translateY(-50%);font-size:46px;color:var(--cream);cursor:pointer;padding:10px 18px;user-select:none;opacity:.7}
+  .lb .nav-btn:hover{opacity:1}
+  .lb .prev{left:8px}.lb .next{right:8px}
+
+  /* about */
+  .about{background:var(--wall2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about .row{display:grid;grid-template-columns:1fr 1.2fr;gap:50px;align-items:center;max-width:1000px;margin:0 auto}
+  .portrait{width:100%;aspect-ratio:4/5;background:repeating-linear-gradient(45deg,#2b2219,#2b2219 12px,#312718 12px,#312718 24px);border:10px solid;border-image:linear-gradient(135deg,#d9b978,#8a6c39) 1;display:flex;align-items:center;justify-content:center;color:#9b8a6c;font-style:italic;text-align:center;padding:20px}
+  .about h2{font-size:clamp(30px,4.5vw,44px);margin-bottom:16px}
+  .about p{color:#d8cdb6;margin-bottom:14px;font-size:18px}
+  .about .sig{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:var(--frame);margin-top:8px}
+
+  .form{max-width:620px;margin:0 auto}
+  .form p.lead{text-align:center;color:var(--muted);font-size:18px;margin-bottom:26px;font-style:italic}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .field input,.field textarea{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:2px;color:var(--cream);font-family:inherit;font-size:17px;padding:12px 14px}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--frame)}
+  .field textarea{min-height:120px;resize:vertical}
+  .submit{width:100%;background:var(--frame);color:#1a140d;border:none;border-radius:2px;font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:1px;padding:14px;cursor:pointer;transition:.2s}
+  .submit:hover{background:#d8b978}
+  .form .note{text-align:center;color:#8c7d63;font-size:13px;margin-top:13px}
+
+  footer{text-align:center;padding:46px 0;border-top:1px solid var(--line);color:var(--muted)}
+  footer .contact{font-size:18px;margin-bottom:8px}
+  footer a{color:var(--frame)}
+  footer .fine{font-size:13px;color:#7a6c54;margin-top:10px}
+  @media(max-width:760px){.about .row{grid-template-columns:1fr;gap:30px}nav.links{display:none}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">On The <b>Wall Art</b></div>
+    <nav class="links"><a href="#gallery">Gallery</a><a href="#about">About</a><a href="#inquire">Inquire</a></nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Original Watercolours</div>
+    <h1>Susan Graham</h1>
+    <div class="sub">A garden of flowers, painted by hand</div>
+    <div class="rule"></div>
+  </div>
+</div>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">The Collection</div><h2>Paintings</h2></div>
+    <div class="prints-banner">Love a piece? <b>Originals are available, and every painting can be ordered as a museum-quality print</b> — paper, canvas, or framed, shipped to your door.</div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="row">
+      <div class="portrait">Add a photo of Susan<br>portrait.jpg</div>
+      <div>
+        <div class="eyebrow" style="letter-spacing:4px;text-transform:uppercase;font-size:12px;color:var(--frame)">The Artist</div>
+        <h2>About Susan</h2>
+        <p>[A few warm sentences about Susan here — where she paints in Dorchester, how long she's been at it, and her love of flowers and watercolour. Two short paragraphs is perfect.]</p>
+        <p>[A line about her style — the loose, luminous botanicals, the colour, what one of her pieces brings to a room.]</p>
+        <div class="sig">— Susan Graham · Dorchester, Ontario</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="inquire">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Purchase &amp; Commissions</div><h2>Inquire</h2></div>
+    <div class="form">
+      <p class="lead">Interested in a painting, a print, or a commission? Send a note and Susan will get back to you.</p>
+      <div class="field"><label>Your name</label><input id="f-name" type="text" placeholder="Your name"></div>
+      <div class="field"><label>Your email</label><input id="f-email" type="email" placeholder="you@email.com"></div>
+      <div class="field"><label>Painting</label><input id="f-piece" type="text" placeholder="e.g. Watercolour No. 12, or a general inquiry"></div>
+      <div class="field"><label>Message</label><textarea id="f-msg" placeholder="Tell her what you have in mind…"></textarea></div>
+      <button class="submit" onclick="sendInquiry()">Send Inquiry</button>
+      <div class="note">This opens your email app with the message ready to send.</div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="contact">On The Wall Art · Susan Graham · Dorchester, Ontario · <a href="mailto:email@example.com">email@example.com</a></div>
+  <div class="fine">© <span id="yr"></span> On The Wall Art · Susan Graham. All paintings are original works.</div>
+</div></footer>
+
+<!-- lightbox -->
+<div class="lb" id="lb">
+  <span class="x" onclick="closeLb()">✕</span>
+  <span class="nav-btn prev" onclick="step(-1)">‹</span>
+  <img id="lb-img" src="" alt="">
+  <span class="nav-btn next" onclick="step(1)">›</span>
+  <div class="cap" id="lb-cap"></div>
+</div>
+
+<script>
+  // ===== change these two when ready =====
+  var ARTIST_EMAIL = "email@example.com";          // Susan's email (for inquiries)
+  var STORE_URL    = "https://pixels.com";          // her print-store link (Fine Art America / Pixels)
+
+  // ===== her paintings — edit titles & prices here anytime =====
+  var PAINTINGS = [
+  { src: "paintings/susan-01.jpg", title: "Iris", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-02.jpg", title: "Anemones", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-03.jpg", title: "Poppies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-04.jpg", title: "Red Amaryllis", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-05.jpg", title: "White Magnolia", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-06.jpg", title: "Black-Eyed Susans", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-07.jpg", title: "Cotton Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-08.jpg", title: "Pink Tulips", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-09.jpg", title: "Evening Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-10.jpg", title: "Daffodils", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-11.jpg", title: "Red Geraniums", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-12.jpg", title: "Scarlet Blooms", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-13.jpg", title: "Cherry Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-14.jpg", title: "Spring Branches", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-15.jpg", title: "Blossom Branch", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-16.jpg", title: "Red Blooms", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-17.jpg", title: "Pink Protea", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-18.jpg", title: "Wildflowers", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-19.jpg", title: "Daffodils in Spring", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-20.jpg", title: "Bird of Paradise", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-21.jpg", title: "Bird of Paradise II", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-22.jpg", title: "Birds of Paradise", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-23.jpg", title: "Golden Daffodil", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-24.jpg", title: "Pink Coneflower", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-25.jpg", title: "Yellow Freesia", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-26.jpg", title: "Cactus Bloom", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-27.jpg", title: "Sunflowers", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-28.jpg", title: "Studio Wall", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-29.jpg", title: "Lupines", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-30.jpg", title: "Sunflower Field", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-31.jpg", title: "White Daisies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-32.jpg", title: "White Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-33.jpg", title: "Pink Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-34.jpg", title: "Peach Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-35.jpg", title: "White Lilies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-36.jpg", title: "Fuchsia", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-37.jpg", title: "White Poppies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-38.jpg", title: "Red Poppies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-39.jpg", title: "Framed Bouquet", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-40.jpg", title: "Red Tulips", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-41.jpg", title: "Crimson Poppies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-42.jpg", title: "Black-Eyed Susans", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-43.jpg", title: "Daffodils", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-44.jpg", title: "Pink Ranunculus", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-45.jpg", title: "Spring Daffodils", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-46.jpg", title: "Evening Vase", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-47.jpg", title: "Single Daisy", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-48.jpg", title: "Lavender", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-49.jpg", title: "Red Poppies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-50.jpg", title: "Tulips in Bloom", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-51.jpg", title: "Yellow Poppies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-52.jpg", title: "Pink Hibiscus", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-53.jpg", title: "Daisies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-54.jpg", title: "Apple Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-55.jpg", title: "Tulips", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-56.jpg", title: "Water Lilies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-57.jpg", title: "Sunflower", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-58.jpg", title: "Pansies", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-59.jpg", title: "Red Roses", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-60.jpg", title: "Peonies", medium: "Watercolour", price: "Inquire", sold:false }
+];
+
+  var grid = document.getElementById('grid');
+  PAINTINGS.forEach(function(p, i){
+    var card = document.createElement('div'); card.className = 'piece';
+    card.innerHTML =
+      '<div class="art" onclick="openLb('+i+')"><img loading="lazy" src="'+p.src+'" alt="'+p.title+'"></div>'+
+      '<div class="plaque"><div class="title">'+p.title+'</div>'+
+      '<div class="meta">'+(p.medium||'')+(p.price && p.price!=='Inquire' ? ' · '+p.price : '')+'</div>'+
+      '<div class="acts">'+
+        (p.sold ? '<a class="sold">Sold</a>' : '<a class="inquire" onclick="inquireFor(\''+p.title.replace(/'/g,"")+'\')">Inquire</a>')+
+        '<a class="buyprint" href="'+(p.print||STORE_URL)+'" target="_blank" rel="noopener">Buy Prints</a>'+
+      '</div></div>';
+    grid.appendChild(card);
+  });
+
+  // lightbox
+  var lbI = 0;
+  function openLb(i){ lbI=i; var p=PAINTINGS[i];
+    document.getElementById('lb-img').src=p.src;
+    document.getElementById('lb-cap').textContent=p.title+(p.medium?' · '+p.medium:'');
+    document.getElementById('lb').classList.add('open'); }
+  function closeLb(){ document.getElementById('lb').classList.remove('open'); }
+  function step(d){ lbI=(lbI+d+PAINTINGS.length)%PAINTINGS.length; openLb(lbI); }
+  document.getElementById('lb').addEventListener('click',function(e){ if(e.target===this) closeLb(); });
+  document.addEventListener('keydown',function(e){ if(!document.getElementById('lb').classList.contains('open'))return;
+    if(e.key==='Escape')closeLb(); if(e.key==='ArrowRight')step(1); if(e.key==='ArrowLeft')step(-1); });
+
+  function inquireFor(title){ document.getElementById('f-piece').value=title;
+    document.getElementById('inquire').scrollIntoView({behavior:'smooth'}); }
+
+  function sendInquiry(){
+    var name=document.getElementById('f-name').value||'(no name)';
+    var email=document.getElementById('f-email').value||'(no email)';
+    var piece=document.getElementById('f-piece').value||'General inquiry';
+    var msg=document.getElementById('f-msg').value;
+    var body='Name: '+name+'\nEmail: '+email+'\nInterested in: '+piece+'\n\n'+msg;
+    window.location.href='mailto:'+ARTIST_EMAIL+'?subject='+encodeURIComponent('Inquiry — '+piece)+'&body='+encodeURIComponent(body);
+  }
+  document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

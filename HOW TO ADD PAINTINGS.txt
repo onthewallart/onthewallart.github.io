@@ -1,0 +1,55 @@
+MOM'S GALLERY — quick guide (no rush, do this whenever)
+
+TO SEE IT:  double-click  index.html  (opens in your web browser)
+
+WHEN YOU'RE READY TO FILL IT IN — just 3 things:
+
+1) ADD PHOTOS
+   - Put painting photos in this "paintings" folder.
+   - Name them simply: 01.jpg, 02.jpg, 03.jpg ...
+   - In index.html, each painting has a line like:
+        <div class="ph">Add painting photo<span>paintings / 01.jpg</span></div>
+     Replace that whole line with:
+        <img src="paintings/01.jpg" alt="Title">
+
+2) HER NAME + EMAIL
+   - Search index.html for [Artist Name] and change it.
+   - Change  email@example.com  to her real email (2 spots).
+
+3) TITLES + PRICES
+   - Edit the title / medium / size / price text under each painting.
+   - For a sold piece, mark it "Sold" (template shows how).
+
+OR — just hand it back to Claude with the photos in this folder and
+say "wire up mom's gallery," and it'll do all of the above for you.
+
+LATER: when it's ready, Claude can publish it online as a real
+website with its own link she can share.
+
+----------------------------------------------------
+SELLING PRINTS (already wired in — almost no work)
+----------------------------------------------------
+The gallery already has a "Buy Prints" button under every painting.
+You just need a print-on-demand account so someone else does the
+printing, shipping, and payment. Recommended for paintings:
+
+  FINE ART AMERICA  (pixels.com)  — free to join, made for painters.
+  It prints paper / canvas / framed art, ships it, takes the payment,
+  and pays her out. She sets her own prices.
+
+SET IT UP (15 min, do it whenever):
+  1) Make a free account at pixels.com (Fine Art America).
+  2) Upload photos of her paintings; set print prices.
+  3) Copy her storefront link (looks like
+     https://pixels.com/profiles/her-name ).
+  4) In index.html, find:  var STORE_URL = "https://pixels.com";
+     and paste her link in place of https://pixels.com.
+
+  That's it — every "Buy Prints" button now sends buyers to her shop.
+
+  (Optional: to point one painting at its own print page, add
+   data-print="https://...its-page..."  inside that painting's
+   <div class="plaque">  tag.)
+
+Prefer her OWN store instead of a marketplace? Tell Claude and it can
+set it up with Gelato + a simple storefront later.
