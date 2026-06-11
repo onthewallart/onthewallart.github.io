@@ -25,11 +25,15 @@
   nav.links a{margin-left:24px;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);transition:color .2s}
   nav.links a:hover{color:var(--frame)}
 
-  .hero{text-align:center;padding:80px 0 56px;border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 50% -10%, #2a2017 0%, var(--wall) 60%)}
-  .hero .eyebrow{letter-spacing:5px;text-transform:uppercase;font-size:13px;color:var(--frame)}
-  .hero h1{font-size:clamp(44px,8vw,82px);line-height:1.02;margin:14px 0 8px}
-  .hero .sub{font-style:italic;font-size:clamp(18px,3vw,24px);color:var(--muted)}
-  .rule{width:64px;height:1px;background:var(--frame);margin:24px auto 0}
+  .hero{position:relative;text-align:center;padding:130px 0 120px;border-bottom:1px solid var(--line);
+    background-image:linear-gradient(rgba(15,11,7,.5),rgba(15,11,7,.78)),url('header-wall.jpg');
+    background-size:cover;background-position:center}
+  .hero .eyebrow{letter-spacing:6px;text-transform:uppercase;font-size:18px;color:var(--frame);text-shadow:0 2px 8px rgba(0,0,0,.7)}
+  .hero h1{font-size:clamp(50px,9vw,100px);line-height:1;margin:16px 0 10px;color:#fbf7ee;text-shadow:0 4px 22px rgba(0,0,0,.6)}
+  .hero .sub{font-style:italic;font-size:clamp(19px,3vw,27px);color:#efe7d6;text-shadow:0 2px 12px rgba(0,0,0,.7)}
+  .hero .scroll{display:inline-block;margin-top:30px;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:#1a140d;background:var(--frame);padding:13px 28px;border-radius:2px;transition:.2s}
+  .hero .scroll:hover{background:#d8b978}
+  .rule{width:70px;height:1px;background:var(--frame);margin:24px auto 0}
 
   section{padding:64px 0}
   .sec-head{text-align:center;margin-bottom:34px}
@@ -67,7 +71,8 @@
   /* about */
   .about{background:var(--wall2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .about .row{display:grid;grid-template-columns:1fr 1.2fr;gap:50px;align-items:center;max-width:1000px;margin:0 auto}
-  .portrait{width:100%;aspect-ratio:4/5;background:repeating-linear-gradient(45deg,#2b2219,#2b2219 12px,#312718 12px,#312718 24px);border:10px solid;border-image:linear-gradient(135deg,#d9b978,#8a6c39) 1;display:flex;align-items:center;justify-content:center;color:#9b8a6c;font-style:italic;text-align:center;padding:20px}
+  .portrait{width:100%;aspect-ratio:480/335;border:10px solid;border-image:linear-gradient(135deg,#d9b978,#8a6c39) 1;overflow:hidden;line-height:0;box-shadow:0 16px 34px rgba(0,0,0,.5)}
+  .portrait img{width:100%;height:100%;object-fit:cover;object-position:center}
   .about h2{font-size:clamp(30px,4.5vw,44px);margin-bottom:16px}
   .about p{color:#d8cdb6;margin-bottom:14px;font-size:18px}
   .about .sig{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:var(--frame);margin-top:8px}
@@ -101,10 +106,11 @@
 
 <div class="hero">
   <div class="wrap">
-    <div class="eyebrow">Original Watercolours</div>
+    <div class="eyebrow">On The Wall Art</div>
     <h1>Susan Graham</h1>
-    <div class="sub">A garden of flowers, painted by hand</div>
+    <div class="sub">Original watercolours — a garden of flowers, painted by hand</div>
     <div class="rule"></div>
+    <a class="scroll" href="#gallery">View the Collection ↓</a>
   </div>
 </div>
 
@@ -119,12 +125,12 @@
 <section id="about" class="about">
   <div class="wrap">
     <div class="row">
-      <div class="portrait">Add a photo of Susan<br>portrait.jpg</div>
+      <div class="portrait"><img src="about-susan.jpg" alt="Susan Graham"></div>
       <div>
         <div class="eyebrow" style="letter-spacing:4px;text-transform:uppercase;font-size:12px;color:var(--frame)">The Artist</div>
         <h2>About Susan</h2>
-        <p>[A few warm sentences about Susan here — where she paints in Dorchester, how long she's been at it, and her love of flowers and watercolour. Two short paragraphs is perfect.]</p>
-        <p>[A line about her style — the loose, luminous botanicals, the colour, what one of her pieces brings to a room.]</p>
+        <p>Susan Graham paints the garden as she sees it — loose, luminous, and full of life. Working in watercolour from her home in Dorchester, Ontario, she lets the colour pool and bloom across the paper, catching flowers at their most alive: poppies mid-sway, a magnolia just opening, a bird of paradise reaching for the light.</p>
+        <p>Every piece is painted by hand, one at a time. Her hope is a simple one — that a little of that colour and quiet finds its way onto your wall, and brings the garden indoors all year round.</p>
         <div class="sig">— Susan Graham · Dorchester, Ontario</div>
       </div>
     </div>
@@ -147,7 +153,7 @@
 </section>
 
 <footer><div class="wrap">
-  <div class="contact">On The Wall Art · Susan Graham · Dorchester, Ontario · <a href="mailto:email@example.com">email@example.com</a></div>
+  <div class="contact">On The Wall Art · Susan Graham · Dorchester, Ontario · <a href="mailto:susang7@hotmail.com">susang7@hotmail.com</a></div>
   <div class="fine">© <span id="yr"></span> On The Wall Art · Susan Graham. All paintings are original works.</div>
 </div></footer>
 
@@ -162,7 +168,7 @@
 
 <script>
   // ===== change these two when ready =====
-  var ARTIST_EMAIL = "email@example.com";          // Susan's email (for inquiries)
+  var ARTIST_EMAIL = "susang7@hotmail.com";          // Susan's email (for inquiries)
   var STORE_URL    = "https://pixels.com";          // her print-store link (Fine Art America / Pixels)
 
   // ===== her paintings — edit titles & prices here anytime =====
@@ -176,7 +182,7 @@
   { src: "paintings/susan-07.jpg", title: "Cotton Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-08.jpg", title: "Pink Tulips", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-09.jpg", title: "Evening Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-10.jpg", title: "Daffodils", medium: "Watercolour", price: "Inquire", sold:false },
+  { src: "paintings/susan-10.jpg", title: "Golden Daffodil", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-11.jpg", title: "Red Geraniums", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-12.jpg", title: "Scarlet Blooms", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-13.jpg", title: "Cherry Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
@@ -185,18 +191,13 @@
   { src: "paintings/susan-16.jpg", title: "Red Blooms", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-17.jpg", title: "Pink Protea", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-18.jpg", title: "Wildflowers", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-19.jpg", title: "Daffodils in Spring", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-20.jpg", title: "Bird of Paradise", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-21.jpg", title: "Bird of Paradise II", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-22.jpg", title: "Birds of Paradise", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-23.jpg", title: "Golden Daffodil", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-24.jpg", title: "Pink Coneflower", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-25.jpg", title: "Yellow Freesia", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-26.jpg", title: "Cactus Bloom", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-27.jpg", title: "Sunflowers", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-28.jpg", title: "Studio Wall", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-29.jpg", title: "Lupines", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-30.jpg", title: "Sunflower Field", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-31.jpg", title: "White Daisies", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-32.jpg", title: "White Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-33.jpg", title: "Pink Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
@@ -205,7 +206,6 @@
   { src: "paintings/susan-36.jpg", title: "Fuchsia", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-37.jpg", title: "White Poppies", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-38.jpg", title: "Red Poppies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-39.jpg", title: "Framed Bouquet", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-40.jpg", title: "Red Tulips", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-41.jpg", title: "Crimson Poppies", medium: "Watercolour", price: "Inquire", sold:false },
   { src: "paintings/susan-42.jpg", title: "Black-Eyed Susans", medium: "Watercolour", price: "Inquire", sold:false },
