@@ -255,7 +255,8 @@
     if(e.key==='Escape')closeLb(); if(e.key==='ArrowRight')step(1); if(e.key==='ArrowLeft')step(-1); });
 
   function inquireFor(title){ document.getElementById('f-piece').value=title;
-    document.getElementById('inquire').scrollIntoView({behavior:'smooth'}); }
+    document.getElementById('inquire').scrollIntoView({behavior:'smooth', block:'start'});
+    setTimeout(function(){ var n=document.getElementById('f-name'); n.focus({preventScroll:true}); }, 500); }
 
   function orderPrint(title){
     var subject='Print order — '+title;
