@@ -1,0 +1,6 @@
+# Local helper files — never publish these to the website
+*.command
+PUBLISH STEPS - On The Wall Art.txt
+MOVE TO SUSAN'S GITHUB - steps.txt
+CUSTOM DOMAIN STEPS - On The Wall Art.txt
+.DS_Store
