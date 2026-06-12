@@ -37,6 +37,15 @@
   </div>
 </div>
 
+<section id="featured-sec">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">A Glimpse</div><h2>Featured</h2></div>
+    <p class="feat-note">A fresh handful from the collection — different every time you visit.</p>
+    <div class="grid feat" id="featured"></div>
+    <div style="text-align:center;margin-top:30px"><button class="shuffle-btn" onclick="renderFeatured(9)">↻ Show me different ones</button></div>
+  </div>
+</section>
+
 <section id="browse">
   <div class="wrap">
     <div class="sec-head"><div class="eyebrow">The Collection</div><h2>Browse by Style</h2></div>
@@ -109,7 +118,16 @@
   <div class="fine">© <span id="yr"></span> On The Wall Art · Susan Graham. All paintings are original works.</div>
 </div></footer>
 
+<div class="lb" id="lb">
+  <span class="x" onclick="closeLb()">&#10005;</span>
+  <span class="nav-btn prev" onclick="step(-1)">&#8249;</span>
+  <img id="lb-img" src="" alt="">
+  <span class="nav-btn next" onclick="step(1)">&#8250;</span>
+  <div class="cap" id="lb-cap"></div>
+</div>
+
 <script src="data.js"></script>
 <script src="app.js"></script>
+<script>renderFeatured(9);</script>
 </body>
 </html>

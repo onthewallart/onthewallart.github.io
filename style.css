@@ -153,3 +153,12 @@
   nav.links a.home-link{color:var(--frame);font-weight:600}
   .back-link{display:inline-block;margin-bottom:18px;color:var(--muted);font-size:15px;letter-spacing:.04em;transition:color .15s}
   .back-link:hover{color:var(--frame)}
+
+  /* featured wall (home) */
+  #featured-sec{padding-bottom:30px}
+  .feat-note{text-align:center;color:var(--muted);font-style:italic;font-size:18px;margin:-16px 0 30px}
+  .grid.feat{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:900px){.grid.feat{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.grid.feat{grid-template-columns:1fr}}
+  .shuffle-btn{font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:.5px;background:transparent;border:1px solid var(--frame-d);color:var(--cream);padding:11px 26px;border-radius:99px;cursor:pointer;transition:.15s}
+  .shuffle-btn:hover{border-color:var(--frame);color:var(--frame)}

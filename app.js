@@ -76,6 +76,22 @@
     art.appendChild(panel);
   }
 
+  // featured wall on the home page — random picks, fresh every visit
+  window.renderFeatured=function(count){
+    var grid=document.getElementById('featured'); if(!grid) return;
+    var pool=[];
+    PAINTINGS.forEach(function(p){ var e=eff(p); if(!e.deleted) pool.push(e); });
+    for(var i=pool.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=pool[i];pool[i]=pool[j];pool[j]=t; }
+    var pick=pool.slice(0,count||9);
+    grid.innerHTML=''; visible=pick;
+    pick.forEach(function(e,v){
+      var card=document.createElement('div'); card.className='piece';
+      card.innerHTML=cardHTML(e);
+      card.querySelector('.art').onclick=(function(x){return function(){ if(!document.body.classList.contains('editing')) openLb(x); };})(v);
+      grid.appendChild(card);
+    });
+  };
+
   // counts on the home category cards
   function updateCounts(){
     var counts={};
