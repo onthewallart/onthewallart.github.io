@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Florals — On The Wall Art · Susan Graham</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">On The <b>Wall Art</b></a>
+    <nav class="links">
+      <a href="florals.html" class="active">Florals</a>
+      <a href="scenes.html">Scenes</a>
+      <a href="animals.html">Animals</a>
+      <a href="figures.html">Figures</a>
+      <a href="abstract.html">Abstract</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#inquire">Inquire</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">The Collection</div>
+    <h1>Florals</h1>
+    <div class="count">Flowers, blossoms, and botanicals · 175 works</div>
+  </div>
+</div>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="prints-banner">Love a piece? <b>Each painting is an original, one-of-a-kind work.</b> Some are still available — reach out and Susan will let you know.</div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="contact">On The Wall Art · Susan Graham · Dorchester, Ontario · <a href="mailto:susang7@hotmail.com">susang7@hotmail.com</a></div>
+  <div class="fine">© <span id="yr"></span> On The Wall Art · Susan Graham. All paintings are original works.</div>
+</div></footer>
+
+<!-- lightbox -->
+<div class="lb" id="lb">
+  <span class="x" onclick="closeLb()">✕</span>
+  <span class="nav-btn prev" onclick="step(-1)">‹</span>
+  <img id="lb-img" src="" alt="">
+  <span class="nav-btn next" onclick="step(1)">›</span>
+  <div class="cap" id="lb-cap"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>renderGrid('Florals');</script>
+</body>
+</html>
