@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scenes — On The Wall Art · Susan Graham</title>
+<title>Beaches — On The Wall Art · Susan Graham</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -15,7 +15,9 @@
     <a class="brand" href="index.html">On The <b>Wall Art</b></a>
     <nav class="links">
       <a href="florals.html">Florals</a>
-      <a href="scenes.html" class="active">Scenes</a>
+      <a href="beaches.html" class="active">Beaches</a>
+      <a href="landscapes.html">Landscapes</a>
+      <a href="towns.html">Towns</a>
       <a href="animals.html">Animals</a>
       <a href="figures.html">Figures</a>
       <a href="abstract.html">Abstract</a>
@@ -28,34 +30,33 @@
 <div class="page-hero">
   <div class="wrap">
     <div class="eyebrow">The Collection</div>
-    <h1>Scenes</h1>
-    <div class="count">Landscapes, shorelines, and places · 182 works</div>
+    <h1>Beaches</h1>
+    <div class="count">Shorelines, seascapes, and the sea</div>
   </div>
 </div>
 
 <section id="gallery">
   <div class="wrap">
-    <div class="prints-banner">Love a piece? <b>Each painting is an original, one-of-a-kind work.</b> Some are still available — reach out and Susan will let you know.</div>
+    <div class="prints-banner">Every painting here is an <b>original, one-of-a-kind work.</b> Pieces marked <b>Sold</b> have found a home — anything not marked is available. Reach out and Susan will be glad to help.</div>
     <div class="grid" id="grid"></div>
   </div>
 </section>
 
 <footer><div class="wrap">
   <div class="contact">On The Wall Art · Susan Graham · Dorchester, Ontario · <a href="mailto:susang7@hotmail.com">susang7@hotmail.com</a></div>
-  <div class="fine">© <span id="yr"></span> On The Wall Art · Susan Graham. All paintings are original works.</div>
+  <div class="fine">&copy; <span id="yr"></span> On The Wall Art · Susan Graham. All paintings are original works.</div>
 </div></footer>
 
-<!-- lightbox -->
 <div class="lb" id="lb">
-  <span class="x" onclick="closeLb()">✕</span>
-  <span class="nav-btn prev" onclick="step(-1)">‹</span>
+  <span class="x" onclick="closeLb()">&#10005;</span>
+  <span class="nav-btn prev" onclick="step(-1)">&#8249;</span>
   <img id="lb-img" src="" alt="">
-  <span class="nav-btn next" onclick="step(1)">›</span>
+  <span class="nav-btn next" onclick="step(1)">&#8250;</span>
   <div class="cap" id="lb-cap"></div>
 </div>
 
 <script src="data.js"></script>
 <script src="app.js"></script>
-<script>renderGrid('Scenes');</script>
+<script>renderGrid('Beaches');</script>
 </body>
 </html>

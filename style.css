@@ -104,3 +104,47 @@
   .page-hero h1{font-size:clamp(38px,7vw,68px);margin-top:10px;color:#fbf7ee}
   .page-hero .count{color:var(--muted);font-style:italic;font-size:18px;margin-top:8px}
   nav.links a.active{color:var(--frame)}
+
+  /* ===== Sold ribbon ===== */
+  .art{position:relative}
+  .sold-flag{position:absolute;top:14px;left:-2px;background:#9b2f2f;color:#fff;font-family:'EB Garamond',serif;
+    font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:5px 14px 5px 10px;box-shadow:0 3px 8px rgba(0,0,0,.4)}
+
+  /* ===== In-browser editor ===== */
+  #editToggle{position:fixed;right:18px;bottom:18px;z-index:200;background:var(--frame);color:#1a140d;border:none;
+    font-family:'Cormorant Garamond',serif;font-size:17px;letter-spacing:.5px;padding:11px 20px;border-radius:99px;
+    cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.5);transition:.18s}
+  #editToggle:hover{background:#d8b978}
+  body.editing #editToggle{display:none}
+
+  #editBar{position:fixed;top:0;left:0;right:0;z-index:300;display:none;align-items:center;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;background:#1c1208;border-bottom:2px solid var(--frame);padding:10px 20px;
+    box-shadow:0 6px 20px rgba(0,0,0,.5)}
+  body.editing #editBar{display:flex}
+  body.editing{padding-top:58px}
+  #editBar .eb-msg{color:var(--cream);font-size:15px}
+  #editBar .eb-msg b{color:var(--frame)}
+  #editBar .eb-actions{display:flex;gap:10px;flex-wrap:wrap}
+  #editBar button{font-family:inherit;font-size:14px;padding:8px 14px;border-radius:4px;cursor:pointer;border:1px solid var(--frame-d);background:transparent;color:var(--cream);transition:.15s}
+  #editBar button:hover{border-color:var(--frame);color:var(--frame)}
+  #ebDownload{background:var(--frame)!important;color:#1a140d!important;border-color:var(--frame)!important;font-weight:600}
+  #ebDownload:hover{background:#d8b978!important}
+
+  .editing-card .art{cursor:default}
+  .ec-x{position:absolute;top:8px;right:8px;z-index:6;width:32px;height:32px;border-radius:50%;border:none;
+    background:#9b2f2f;color:#fff;font-size:16px;line-height:1;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.5)}
+  .ec-x:hover{background:#c23b3b}
+  .ec-panel{position:absolute;left:0;right:0;bottom:0;z-index:6;background:rgba(20,14,8,.92);padding:10px;display:flex;flex-direction:column;gap:8px}
+  .ec-title{width:100%;background:#2a2018;border:1px solid var(--frame-d);border-radius:3px;color:var(--cream);font-family:inherit;font-size:15px;padding:7px 9px}
+  .ec-title:focus{outline:none;border-color:var(--frame)}
+  .ec-row{display:flex;gap:8px}
+  .ec-btn{flex:1;background:#2a2018;border:1px solid var(--frame-d);color:var(--cream);font-family:inherit;font-size:13px;padding:7px;border-radius:3px;cursor:pointer}
+  .ec-btn.on{background:#9b2f2f;border-color:#9b2f2f;color:#fff}
+  .ec-sel{flex:1;background:#2a2018;border:1px solid var(--frame-d);color:var(--cream);font-family:inherit;font-size:13px;padding:7px;border-radius:3px;cursor:pointer}
+
+  /* ===== nav: wrap / scroll on small screens instead of hiding ===== */
+  @media(max-width:760px){
+    nav.links{display:flex;overflow-x:auto;gap:4px;-webkit-overflow-scrolling:touch}
+    nav.links a{margin-left:0;padding:6px 9px;font-size:12px;white-space:nowrap}
+    .nav .wrap{height:auto;flex-direction:column;gap:6px;padding-top:10px;padding-bottom:10px}
+  }
