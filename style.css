@@ -142,11 +142,12 @@
   .ec-btn.on{background:#9b2f2f;border-color:#9b2f2f;color:#fff}
   .ec-sel{flex:1;background:#2a2018;border:1px solid var(--frame-d);color:var(--cream);font-family:inherit;font-size:13px;padding:7px;border-radius:3px;cursor:pointer}
 
-  /* ===== nav: wrap onto multiple rows on small screens (no sideways scroll) ===== */
+  /* ===== nav: compact wrap on small screens (2 tight rows, no sideways scroll) ===== */
   @media(max-width:760px){
-    nav.links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;width:100%}
-    nav.links a{margin-left:0;padding:4px 2px;font-size:13px;white-space:nowrap}
-    .nav .wrap{height:auto;flex-direction:column;gap:10px;padding-top:12px;padding-bottom:12px}
+    .nav .wrap{height:auto;flex-direction:column;gap:5px;padding-top:7px;padding-bottom:7px}
+    .brand{font-size:17px;letter-spacing:1.5px}
+    nav.links{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 10px;width:100%}
+    nav.links a{margin-left:0;padding:1px 0;font-size:10.5px;letter-spacing:.4px;white-space:nowrap}
   }
 
   /* home / back links */
