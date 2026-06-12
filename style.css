@@ -148,3 +148,8 @@
     nav.links a{margin-left:0;padding:6px 9px;font-size:12px;white-space:nowrap}
     .nav .wrap{height:auto;flex-direction:column;gap:6px;padding-top:10px;padding-bottom:10px}
   }
+
+  /* home / back links */
+  nav.links a.home-link{color:var(--frame);font-weight:600}
+  .back-link{display:inline-block;margin-bottom:18px;color:var(--muted);font-size:15px;letter-spacing:.04em;transition:color .15s}
+  .back-link:hover{color:var(--frame)}
