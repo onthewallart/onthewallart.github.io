@@ -93,6 +93,14 @@
   footer a{color:var(--frame)}
   footer .fine{font-size:13px;color:#7a6c54;margin-top:10px}
   @media(max-width:760px){.about .row{grid-template-columns:1fr;gap:30px}nav.links{display:none}}
+
+  /* category filter bar */
+  .filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:0 0 30px}
+  .filt{font-family:inherit;font-size:13px;letter-spacing:.06em;color:var(--ink);
+    background:transparent;border:1px solid rgba(180,150,110,.4);padding:8px 16px;border-radius:99px;
+    cursor:pointer;transition:all .15s}
+  .filt:hover{border-color:var(--frame);color:var(--frame)}
+  .filt.on{background:var(--frame);border-color:var(--frame);color:#1a1410}
 </style>
 </head>
 <body>
@@ -117,7 +125,8 @@
 <section id="gallery">
   <div class="wrap">
     <div class="sec-head"><div class="eyebrow">The Collection</div><h2>Paintings</h2></div>
-    <div class="prints-banner">Love a piece? <b>Originals are available, and every painting can be ordered as a museum-quality print</b> — paper, canvas, or framed, shipped to your door.</div>
+    <div class="prints-banner">Love a piece? <b>Every painting is an original, one-of-a-kind work</b> — reach out and Susan will be glad to tell you more.</div>
+    <div class="filters" id="filters"></div>
     <div class="grid" id="grid"></div>
   </div>
 </section>
@@ -130,7 +139,7 @@
         <div class="eyebrow" style="letter-spacing:4px;text-transform:uppercase;font-size:12px;color:var(--frame)">The Artist</div>
         <h2>About Susan</h2>
         <p>Susan Graham paints the garden as she sees it — loose, luminous, and full of life. Working in watercolour from her home in Dorchester, Ontario, she lets the colour pool and bloom across the paper, catching flowers at their most alive: poppies mid-sway, a magnolia just opening, a bird of paradise reaching for the light.</p>
-        <p>Every piece is painted by hand, one at a time. Her hope is a simple one — that a little of that colour and quiet finds its way onto your wall, and brings the garden indoors all year round.</p>
+        <p>Every piece is painted by hand, one at a time. Her hope is a simple one — that a little of that colour and quiet finds its way onto your wall.</p>
         <div class="sig">— Susan Graham · Dorchester, Ontario</div>
       </div>
     </div>
@@ -141,7 +150,7 @@
   <div class="wrap">
     <div class="sec-head"><div class="eyebrow">Purchase &amp; Commissions</div><h2>Inquire</h2></div>
     <div class="form">
-      <p class="lead">Interested in a painting, a print, or a commission? Send a note and Susan will get back to you.</p>
+      <p class="lead">Interested in a painting or a commission? Send a note and Susan will get back to you.</p>
       <div class="field"><label>Your name</label><input id="f-name" type="text" placeholder="Your name"></div>
       <div class="field"><label>Your email</label><input id="f-email" type="email" placeholder="you@email.com"></div>
       <div class="field"><label>Painting</label><input id="f-piece" type="text" placeholder="e.g. Watercolour No. 12, or a general inquiry"></div>
@@ -172,84 +181,480 @@
 
   // ===== her paintings — edit titles & prices here anytime =====
   var PAINTINGS = [
-  { src: "paintings/susan-01.jpg", title: "Iris", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-02.jpg", title: "Anemones", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-03.jpg", title: "Poppies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-04.jpg", title: "Red Amaryllis", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-05.jpg", title: "White Magnolia", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-06.jpg", title: "Black-Eyed Susans", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-07.jpg", title: "Cotton Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-08.jpg", title: "Pink Tulips", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-09.jpg", title: "Evening Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-10.jpg", title: "Golden Daffodil", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-11.jpg", title: "Red Geraniums", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-12.jpg", title: "Scarlet Blooms", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-13.jpg", title: "Cherry Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-14.jpg", title: "Spring Branches", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-15.jpg", title: "Blossom Branch", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-16.jpg", title: "Red Blooms", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-17.jpg", title: "Pink Protea", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-18.jpg", title: "Wildflowers", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-20.jpg", title: "Bird of Paradise", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-21.jpg", title: "Bird of Paradise II", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-22.jpg", title: "Birds of Paradise", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-24.jpg", title: "Pink Coneflower", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-25.jpg", title: "Yellow Freesia", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-26.jpg", title: "Cactus Bloom", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-27.jpg", title: "Sunflowers", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-31.jpg", title: "White Daisies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-32.jpg", title: "White Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-33.jpg", title: "Pink Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-34.jpg", title: "Peach Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-35.jpg", title: "White Lilies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-36.jpg", title: "Fuchsia", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-37.jpg", title: "White Poppies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-38.jpg", title: "Red Poppies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-40.jpg", title: "Red Tulips", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-41.jpg", title: "Crimson Poppies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-42.jpg", title: "Black-Eyed Susans", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-43.jpg", title: "Daffodils", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-44.jpg", title: "Pink Ranunculus", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-45.jpg", title: "Spring Daffodils", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-46.jpg", title: "Evening Vase", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-47.jpg", title: "Single Daisy", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-48.jpg", title: "Lavender", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-49.jpg", title: "Red Poppies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-50.jpg", title: "Tulips in Bloom", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-51.jpg", title: "Yellow Poppies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-52.jpg", title: "Pink Hibiscus", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-53.jpg", title: "Daisies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-54.jpg", title: "Apple Blossoms", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-55.jpg", title: "Tulips", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-56.jpg", title: "Water Lilies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-57.jpg", title: "Sunflower", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-58.jpg", title: "Pansies", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-59.jpg", title: "Red Roses", medium: "Watercolour", price: "Inquire", sold:false },
-  { src: "paintings/susan-60.jpg", title: "Peonies", medium: "Watercolour", price: "Inquire", sold:false }
+  { src: "paintings/susan-01.jpg", title: "Iris", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-02.jpg", title: "Anemones", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-03.jpg", title: "Poppies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-04.jpg", title: "Red Amaryllis", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-05.jpg", title: "White Magnolia", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-06.jpg", title: "Black-Eyed Susans", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-07.jpg", title: "Cotton Blossoms", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-08.jpg", title: "Pink Tulips", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-09.jpg", title: "Evening Blossoms", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-10.jpg", title: "Golden Daffodil", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-11.jpg", title: "Red Geraniums", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-12.jpg", title: "Scarlet Blooms", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-13.jpg", title: "Cherry Blossoms", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-14.jpg", title: "Spring Branches", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-15.jpg", title: "Blossom Branch", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-16.jpg", title: "Red Blooms", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-17.jpg", title: "Pink Protea", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-18.jpg", title: "Wildflowers", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-20.jpg", title: "Bird of Paradise", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-21.jpg", title: "Bird of Paradise II", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-22.jpg", title: "Birds of Paradise", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-24.jpg", title: "Pink Coneflower", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-25.jpg", title: "Yellow Freesia", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-26.jpg", title: "Cactus Bloom", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-27.jpg", title: "Sunflowers", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-31.jpg", title: "White Daisies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-32.jpg", title: "White Blossoms", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-33.jpg", title: "Pink Blossoms", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-34.jpg", title: "Peach Blossoms", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-35.jpg", title: "White Lilies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-36.jpg", title: "Fuchsia", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-37.jpg", title: "White Poppies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-38.jpg", title: "Red Poppies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-40.jpg", title: "Red Tulips", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-41.jpg", title: "Crimson Poppies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-42.jpg", title: "Black-Eyed Susans", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-43.jpg", title: "Daffodils", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-44.jpg", title: "Pink Ranunculus", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-45.jpg", title: "Spring Daffodils", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-46.jpg", title: "Evening Vase", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-47.jpg", title: "Single Daisy", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-48.jpg", title: "Lavender", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-49.jpg", title: "Red Poppies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-50.jpg", title: "Tulips in Bloom", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-51.jpg", title: "Yellow Poppies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-52.jpg", title: "Pink Hibiscus", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-53.jpg", title: "Daisies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-54.jpg", title: "Apple Blossoms", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-55.jpg", title: "Tulips", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-56.jpg", title: "Water Lilies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-57.jpg", title: "Sunflower", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-58.jpg", title: "Pansies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-59.jpg", title: "Red Roses", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-60.jpg", title: "Peonies", medium: "Watercolour", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-101.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-102.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-103.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-104.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-105.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-106.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-107.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-108.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-109.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-110.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-111.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-112.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-113.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-114.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-115.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-116.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-117.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-118.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-119.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-120.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-121.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-122.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-123.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-124.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-125.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-126.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-127.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-128.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-129.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-130.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-131.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-132.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-133.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-134.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-135.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-136.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-137.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-138.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-139.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-140.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-141.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-142.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-143.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-144.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-145.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-146.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-147.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-148.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-149.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-150.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-151.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-152.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-153.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-154.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-155.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-156.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-157.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-158.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-159.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-160.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-161.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-162.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-163.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-164.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-165.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-166.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-167.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-168.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-169.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-170.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-171.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-172.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-173.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-174.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-175.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-176.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-178.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-179.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-180.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-181.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-182.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-183.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-184.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-185.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-186.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-187.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-188.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-189.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-190.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-191.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-192.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-193.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-194.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-195.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-196.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-197.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-198.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-199.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-200.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-201.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-202.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-203.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-204.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-205.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-206.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-207.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-208.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-209.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-210.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-211.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-212.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-213.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-214.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-215.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-216.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-217.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-218.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-219.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-220.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-221.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-222.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-223.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-224.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-225.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-226.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-227.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-228.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-229.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-230.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-231.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-232.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-233.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-234.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-235.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-236.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-237.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-238.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-239.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-240.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-241.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-242.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-243.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-244.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-245.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-246.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-247.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-248.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-249.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-250.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-251.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-252.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-253.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-254.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-255.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-256.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-257.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-258.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-259.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-260.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-261.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-262.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-263.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-264.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-265.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-266.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-267.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-268.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-269.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-270.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-271.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-272.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-273.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-274.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-275.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-276.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-277.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-278.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-279.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-280.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-281.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-282.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-283.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-284.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-285.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-286.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-287.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-288.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-289.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-290.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-291.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-292.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-293.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-294.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-295.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-296.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-297.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-298.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-299.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-300.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-301.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-303.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-304.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-305.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-306.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-307.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-308.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-309.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-310.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-311.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-312.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-313.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-314.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-315.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-316.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-317.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-318.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-319.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-320.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-321.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-322.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-323.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-324.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-325.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-326.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-327.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-328.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-329.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-330.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-331.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-332.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-333.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-334.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-335.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-336.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-337.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-338.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-339.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-340.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-341.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-342.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-343.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-344.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-345.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-346.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-347.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-348.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-349.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-350.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-351.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-352.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-353.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-354.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-355.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-356.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-357.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-358.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-359.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-360.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-361.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-362.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-363.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-364.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-365.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-366.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-367.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-368.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-369.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-370.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-371.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-372.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-373.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-374.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-375.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-376.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-377.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-378.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-379.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-380.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-381.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-382.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-383.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-384.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-385.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-386.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-387.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-388.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-389.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-390.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-391.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-392.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-393.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-394.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-395.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-396.jpg", title: "Figure", medium: "", price: "Inquire", sold:false, cat:"Figures" },
+  { src: "paintings/susan-397.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-398.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-399.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-400.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-401.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-402.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-403.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-404.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-405.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-406.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-407.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-408.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-409.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-410.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-411.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-412.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-413.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-414.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-415.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-416.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-417.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-418.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-419.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-420.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-421.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-422.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-423.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-424.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-425.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-426.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-427.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-428.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-429.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-430.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-431.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-432.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-433.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-434.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-435.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-436.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-437.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-438.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-439.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-440.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-441.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-442.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-443.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-444.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-445.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-446.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-447.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-448.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-449.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-450.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-451.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-452.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-453.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-454.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-455.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-456.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-457.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-458.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-459.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-460.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-461.jpg", title: "Wildlife", medium: "", price: "Inquire", sold:false, cat:"Animals" },
+  { src: "paintings/susan-462.jpg", title: "Abstract", medium: "", price: "Inquire", sold:false, cat:"Abstract" },
+  { src: "paintings/susan-463.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-464.jpg", title: "Scene", medium: "", price: "Inquire", sold:false, cat:"Scenes" },
+  { src: "paintings/susan-465.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-466.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-467.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-468.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" },
+  { src: "paintings/susan-469.jpg", title: "Floral Study", medium: "", price: "Inquire", sold:false, cat:"Florals" }
 ];
 
   var grid = document.getElementById('grid');
-  PAINTINGS.forEach(function(p, i){
-    var card = document.createElement('div'); card.className = 'piece';
-    card.innerHTML =
-      '<div class="art" onclick="openLb('+i+')"><img loading="lazy" src="'+p.src+'" alt="'+p.title+'"></div>'+
-      '<div class="plaque"><div class="title">'+p.title+'</div>'+
-      '<div class="meta">'+(p.medium||'')+(p.price && p.price!=='Inquire' ? ' · '+p.price : '')+'</div>'+
-      '<div class="acts">'+
-        (p.sold ? '<a class="sold">Sold</a>' : '<a class="inquire" onclick="inquireFor(\''+p.title.replace(/'/g,"")+'\')">Inquire</a>')+
-        '<a class="buyprint" onclick="orderPrint(\''+p.title.replace(/'/g,"")+'\')">Order a Print</a>'+
-      '</div></div>';
-    grid.appendChild(card);
+  var CATS = ['All','Florals','Scenes','Animals','Figures','Abstract'];
+  var activeCat = 'All';
+  var visible = [];   // indices of PAINTINGS currently shown
+
+  // build filter buttons
+  var fbar = document.getElementById('filters');
+  CATS.forEach(function(c){
+    var n = c==='All' ? PAINTINGS.length : PAINTINGS.filter(function(p){return p.cat===c;}).length;
+    if(n===0) return;
+    var b=document.createElement('button');
+    b.className='filt'+(c==='All'?' on':'');
+    b.textContent=c+' ('+n+')';
+    b.onclick=function(){ activeCat=c; render();
+      document.querySelectorAll('.filt').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on'); };
+    fbar.appendChild(b);
   });
 
-  // lightbox
-  var lbI = 0;
-  function openLb(i){ lbI=i; var p=PAINTINGS[i];
+  function cardHTML(p){
+    return '<div class="art"><img loading="lazy" src="'+p.src+'" alt="'+p.title+'"></div>'+
+      '<div class="plaque"><div class="title">'+p.title+'</div>'+
+      '<div class="meta">'+(p.medium|| p.cat)+(p.price && p.price!=='Inquire' ? ' · '+p.price : '')+'</div>'+
+      '<div class="acts">'+
+        (p.sold ? '<a class="sold">Sold</a>' : '<a class="inquire" onclick="inquireFor(\''+p.title.replace(/'/g,"")+'\')">Inquire</a>')+
+      '</div></div>';
+  }
+
+  function render(){
+    grid.innerHTML='';
+    visible=[];
+    PAINTINGS.forEach(function(p,i){
+      if(activeCat!=='All' && p.cat!==activeCat) return;
+      visible.push(i);
+      var vIdx=visible.length-1;
+      var card=document.createElement('div'); card.className='piece';
+      card.innerHTML=cardHTML(p);
+      card.querySelector('.art').onclick=(function(v){return function(){openLb(v);};})(vIdx);
+      grid.appendChild(card);
+    });
+  }
+  render();
+
+  // lightbox (operates over the currently visible list)
+  var lbV = 0;
+  function openLb(v){ lbV=v; var p=PAINTINGS[visible[v]];
     document.getElementById('lb-img').src=p.src;
-    document.getElementById('lb-cap').textContent=p.title+(p.medium?' · '+p.medium:'');
+    document.getElementById('lb-cap').textContent=p.title+(p.medium?' · '+p.medium:' · '+p.cat);
     document.getElementById('lb').classList.add('open'); }
   function closeLb(){ document.getElementById('lb').classList.remove('open'); }
-  function step(d){ lbI=(lbI+d+PAINTINGS.length)%PAINTINGS.length; openLb(lbI); }
+  function step(d){ if(!visible.length)return; lbV=(lbV+d+visible.length)%visible.length; openLb(lbV); }
   document.getElementById('lb').addEventListener('click',function(e){ if(e.target===this) closeLb(); });
   document.addEventListener('keydown',function(e){ if(!document.getElementById('lb').classList.contains('open'))return;
     if(e.key==='Escape')closeLb(); if(e.key==='ArrowRight')step(1); if(e.key==='ArrowLeft')step(-1); });
@@ -258,12 +663,6 @@
     document.getElementById('inquire').scrollIntoView({behavior:'smooth', block:'start'});
     setTimeout(function(){ var n=document.getElementById('f-name'); n.focus({preventScroll:true}); }, 500); }
 
-  function orderPrint(title){
-    var subject='Print order — '+title;
-    var body='Hi Susan,\n\nI would like to order a print of "'+title+'".\n\n'
-      +'Size wanted: \nQuantity: \nMy name: \nShipping address: \n\nThank you!';
-    window.location.href='mailto:'+ARTIST_EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-  }
 
   function sendInquiry(){
     var name=document.getElementById('f-name').value||'(no name)';
